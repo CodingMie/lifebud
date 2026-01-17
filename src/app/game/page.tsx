@@ -43,8 +43,17 @@ export default function ParentingSimulator() {
     feedbackChanges,
     handleOption,
     nextEvent,
-    dialogueIndex
+    dialogueIndex,
+    isLoading,
   } = useGameLogic();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen w-full bg-black text-white text-2xl">
+        <p>游戏生成中，请稍候...</p>
+      </div>
+    );
+  }
 
   if (gameState === 'start') {
     return <StartScreen onStart={() => setGameState('setup')} />;

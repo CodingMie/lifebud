@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Star, Shield, Smile } from 'lucide-react';
 import { CHARACTERS, FALLBACK_DB, INITIAL_ATTRIBUTES, STAGES } from '@/lib/resource';
 
+import { useAgent } from "@copilotkit/react-core/v2";
+
 export type GameState = 'start' | 'setup' | 'playing' | 'end';
 
 export interface Background {
@@ -43,7 +45,9 @@ export interface Event {
 }
 
 export const useGameLogic = () => {
-  const [gameState, setGameState] = useState<GameState>('start'); 
+  const { agent } = useAgent({ agentId: "userBackgroundAgent" });
+  const [gameState, setGameState] = useState<GameState>('start');
+    const [isLoading, setIsLoading] = useState(false); 
   const [stageIndex, setStageIndex] = useState(0);
   const [eventQueue, setEventQueue] = useState<Event[]>([]);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
@@ -96,9 +100,57 @@ export const useGameLogic = () => {
     setFeedbackChanges(null);
   };
 
-  const startGame = () => {
-    setAttributes(INITIAL_ATTRIBUTES);
-    setSavings(background.city === 'tier1' ? 300000 : 200000);
+  const startGame = async () => {
+    setIsLoading(true);
+    
+    const agentInput = {
+      age: background.age,
+      city: background.city,
+      workIntensity: background.workIntensity,
+      partner: background.partner,
+    };
+
+    try {
+      agent.addMessage({
+        id: crypto.randomUUID(),
+        role: 'user',
+        content: JSON.stringify(agentInput),
+      });
+      await agent.runAgent();
+
+      // Find the latest assistant message
+      const latestAssistantMessage = agent.messages.findLast(
+        (message) => message.role === 'assistant'
+      );
+
+      if (!latestAssistantMessage) {
+        throw new Error('Agent did not return an assistant message.');
+      }
+      const parsedResult = JSON.parse(latestAssistantMessage.content || '{}'); 
+      if (!parsedResult.health || !parsedResult.mental || !parsedResult.marriage || !parsedResult.childGrowth || !parsedResult.wealth) {
+        parsedResult.health = 50;
+        parsedResult.mental = 50;
+        parsedResult.marriage = 50;
+        parsedResult.childGrowth = 50;
+        parsedResult.wealth = background.city === 'tier1' ? 300000 : 200000;
+      }
+
+      setAttributes({
+        health: parsedResult.health,
+        mental: parsedResult.mental,
+        marriage: parsedResult.marriage,
+        childGrowth: parsedResult.childGrowth,
+      });
+      setSavings(parsedResult.wealth);
+
+    } catch (error) {
+      console.error("Error calling userBackgroundAgent or parsing result:", error);
+      // Fallback to initial attributes if agent call fails
+      setAttributes(INITIAL_ATTRIBUTES);
+      setSavings(background.city === 'tier1' ? 300000 : 200000);
+    } finally {
+      setIsLoading(false);
+    }
     setStageIndex(0);
     setTotalMonths(0);
     setGameState('playing');
@@ -170,33 +222,34 @@ export const useGameLogic = () => {
   }, [gameState, attributes]);
 
   return {
-    gameState,
-    setGameState,
-    background,
-    setBackground,
-    startGame,
-    endGameReport,
-    currentAgeYear,
-    attributes,
-    savings,
-    currentStage,
-    currentEvent,
-    currentEventIndex,
-    eventQueue,
-    activeSpeaker,
-    activeNPC,
-    mediaData,
-    setMediaData,
-    handleScreenClick,
-    knowledgeVisible: (!!currentEvent?.knowledge || !!currentEvent?.story) && !feedback,
-    showOptions: !feedback && !!currentEvent?.options && isDialogueFinished && textCompleted,
-    currentDialogueLine,
-    textCompleted,
-    setTextCompleted,
-    feedback,
-    feedbackChanges,
-    handleOption,
-    nextEvent,
-    dialogueIndex
-  };
+      gameState,
+      setGameState,
+      isLoading,
+      background,
+      setBackground,
+      startGame,
+      endGameReport,
+      currentAgeYear,
+      attributes,
+      savings,
+      currentStage,
+      currentEvent,
+      currentEventIndex,
+      eventQueue,
+      activeSpeaker,
+      activeNPC,
+      mediaData,
+      setMediaData,
+      handleScreenClick,
+      knowledgeVisible: (!!currentEvent?.knowledge || !!currentEvent?.story) && !feedback,
+      showOptions: !feedback && !!currentEvent?.options && isDialogueFinished && textCompleted,
+      currentDialogueLine,
+      textCompleted,
+      setTextCompleted,
+      feedback,
+      feedbackChanges,
+      handleOption,
+      nextEvent,
+      dialogueIndex
+    };
 };
