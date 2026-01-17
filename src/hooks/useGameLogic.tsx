@@ -3,6 +3,7 @@ import { Star, Shield, Smile } from 'lucide-react';
 import { CHARACTERS, FALLBACK_DB, INITIAL_ATTRIBUTES, STAGES } from '@/lib/resource';
 
 import { useAgent } from "@copilotkit/react-core/v2";
+import { MediaData } from '@/components/game/MediaOverlay';
 
 export type GameState = 'start' | 'setup' | 'playing' | 'end';
 
@@ -40,34 +41,34 @@ export interface Event {
   options?: Option[];
   autoNext?: boolean;
   bgImage?: string;
-  knowledge?: any;
-  story?: any;
+  knowledge?: MediaData;
+  story?: MediaData;
 }
 
 export const useGameLogic = () => {
   const { agent } = useAgent({ agentId: "userBackgroundAgent" });
   const [gameState, setGameState] = useState<GameState>('start');
-    const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const [stageIndex, setStageIndex] = useState(0);
   const [eventQueue, setEventQueue] = useState<Event[]>([]);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
-  const [dialogueIndex, setDialogueIndex] = useState(0); 
-  
+  const [dialogueIndex, setDialogueIndex] = useState(0);
+
   const [attributes, setAttributes] = useState<Attributes>(INITIAL_ATTRIBUTES);
   const [savings, setSavings] = useState(200000);
   const [totalMonths, setTotalMonths] = useState(0);
-  
+
   const [textCompleted, setTextCompleted] = useState(false);
-  const [mediaData, setMediaData] = useState<any>(null);
-  const [feedback, setFeedback] = useState<string | null>(null); 
-  const [feedbackChanges, setFeedbackChanges] = useState<any>(null); 
-  
+  const [mediaData, setMediaData] = useState<MediaData | null | undefined>(null);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [feedbackChanges, setFeedbackChanges] = useState<Partial<Attributes> | null>(null);
+
   const [background, setBackground] = useState<Background>({ age: 28, city: 'tier2', partner: 'supportive', workIntensity: 2 });
 
   const currentAgeYear = background.age + Math.floor(totalMonths / 12);
   const currentStage = STAGES[stageIndex];
   const currentEvent = eventQueue[currentEventIndex];
-  
+
   const currentDialogueLine = currentEvent?.dialogue ? currentEvent.dialogue[dialogueIndex] : null;
   const isDialogueFinished = currentEvent?.dialogue ? dialogueIndex >= currentEvent.dialogue.length - 1 : false;
   const activeSpeaker = currentDialogueLine?.speaker || null;
@@ -75,11 +76,11 @@ export const useGameLogic = () => {
   // 稳定显示人物
   const activeNPC = useMemo(() => {
     if (activeSpeaker && activeSpeaker !== 'hero' && activeSpeaker !== 'narrator' && CHARACTERS[activeSpeaker as keyof typeof CHARACTERS]) {
-        return activeSpeaker;
+      return activeSpeaker;
     }
     if (currentEvent?.dialogue) {
-        const firstNpc = currentEvent.dialogue.find(line => line.speaker !== 'hero' && line.speaker !== 'narrator' && CHARACTERS[line.speaker as keyof typeof CHARACTERS]);
-        return firstNpc ? firstNpc.speaker : null;
+      const firstNpc = currentEvent.dialogue.find(line => line.speaker !== 'hero' && line.speaker !== 'narrator' && CHARACTERS[line.speaker as keyof typeof CHARACTERS]);
+      return firstNpc ? firstNpc.speaker : null;
     }
     return null;
   }, [activeSpeaker, currentEvent]);
@@ -102,7 +103,7 @@ export const useGameLogic = () => {
 
   const startGame = async () => {
     setIsLoading(true);
-    
+
     const agentInput = {
       age: background.age,
       city: background.city,
@@ -126,7 +127,7 @@ export const useGameLogic = () => {
       if (!latestAssistantMessage) {
         throw new Error('Agent did not return an assistant message.');
       }
-      const parsedResult = JSON.parse(latestAssistantMessage.content || '{}'); 
+      const parsedResult = JSON.parse(latestAssistantMessage.content || '{}');
       if (!parsedResult.health || !parsedResult.mental || !parsedResult.marriage || !parsedResult.childGrowth || !parsedResult.wealth) {
         parsedResult.health = 50;
         parsedResult.mental = 50;
@@ -168,7 +169,7 @@ export const useGameLogic = () => {
     setSavings(prev => prev - (opt.cost || 0));
     setTotalMonths(prev => prev - -(opt.months || 0)); // Using subtraction of negative to ensure addition if it's string (safeguard), though type is number
     setFeedback(opt.outcome || null);
-    setFeedbackChanges({ ...opt.changes, cost: opt.cost }); 
+    setFeedbackChanges({ ...opt.changes, cost: opt.cost });
   };
 
   const nextEvent = () => {
@@ -186,8 +187,8 @@ export const useGameLogic = () => {
   };
 
   const handleScreenClick = () => {
-    if (mediaData) return; 
-    
+    if (mediaData) return;
+
     if (feedback) {
       return;
     }
@@ -222,34 +223,34 @@ export const useGameLogic = () => {
   }, [gameState, attributes]);
 
   return {
-      gameState,
-      setGameState,
-      isLoading,
-      background,
-      setBackground,
-      startGame,
-      endGameReport,
-      currentAgeYear,
-      attributes,
-      savings,
-      currentStage,
-      currentEvent,
-      currentEventIndex,
-      eventQueue,
-      activeSpeaker,
-      activeNPC,
-      mediaData,
-      setMediaData,
-      handleScreenClick,
-      knowledgeVisible: (!!currentEvent?.knowledge || !!currentEvent?.story) && !feedback,
-      showOptions: !feedback && !!currentEvent?.options && isDialogueFinished && textCompleted,
-      currentDialogueLine,
-      textCompleted,
-      setTextCompleted,
-      feedback,
-      feedbackChanges,
-      handleOption,
-      nextEvent,
-      dialogueIndex
-    };
+    gameState,
+    setGameState,
+    isLoading,
+    background,
+    setBackground,
+    startGame,
+    endGameReport,
+    currentAgeYear,
+    attributes,
+    savings,
+    currentStage,
+    currentEvent,
+    currentEventIndex,
+    eventQueue,
+    activeSpeaker,
+    activeNPC,
+    mediaData,
+    setMediaData,
+    handleScreenClick,
+    knowledgeVisible: (!!currentEvent?.knowledge || !!currentEvent?.story) && !feedback,
+    showOptions: !feedback && !!currentEvent?.options && isDialogueFinished && textCompleted,
+    currentDialogueLine,
+    textCompleted,
+    setTextCompleted,
+    feedback,
+    feedbackChanges,
+    handleOption,
+    nextEvent,
+    dialogueIndex
+  };
 };
