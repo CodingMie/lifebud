@@ -27,7 +27,7 @@ export const ComicBubble: React.FC<ComicBubbleProps> = ({ speaker, text, onCompl
     return () => clearInterval(timer);
   }, [text, onComplete]);
 
-  const isHero = speaker === 'hero';
+  const isHero = speaker.startsWith('hero');
   const isNarrator = speaker === 'narrator';
   const charInfo = CHARACTERS[speaker] || { name: '旁白' };
 
@@ -41,12 +41,12 @@ export const ComicBubble: React.FC<ComicBubbleProps> = ({ speaker, text, onCompl
      );
   }
 
-  const alignmentClass = isHero ? 'items-start ml-4 md:ml-[15%]' : 'items-end mr-8 md:mr-[20%]';
+  const alignmentClass = isHero ? 'items-start ml-4 md:ml-[25%] -translate-y-50' : 'items-end mr-8 md:mr-[50%] -translate-y-20';
   const bubbleRoundedClass = isHero ? 'rounded-2xl rounded-tl-none' : 'rounded-2xl rounded-tr-none';
   const triangleClass = isHero ? '-left-[8px] top-[15px] border-r-white/70' : '-right-[8px] top-[15px] border-l-white/70';
 
   return (
-    <div className={`w-full max-w-5xl mx-auto flex flex-col ${alignmentClass} mb-8 relative z-50`}>
+    <div className={`w-full max-w-5xl mx-auto flex flex-col ${alignmentClass} mb-8 relative z-20`}>
        <div className={`text-xs font-bold text-slate-300 mb-1 px-2 drop-shadow-md`}>
           {charInfo.name}
        </div>

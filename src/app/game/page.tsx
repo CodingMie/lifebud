@@ -96,7 +96,7 @@ export default function ParentingSimulator() {
       />
 
       {/* 3. 角色立绘层 */}
-      <CharacterLayer activeSpeaker={activeSpeaker} activeNPC={activeNPC} />
+      <CharacterLayer activeSpeaker={activeSpeaker} activeNPC={activeNPC} currentStage={currentStage.id}/>
       
       {/* 4. 知识点悬挂入口 */}
       <KnowledgeButton 

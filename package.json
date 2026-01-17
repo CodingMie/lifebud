@@ -24,6 +24,7 @@
     "@mastra/libsql": "beta",
     "@mastra/memory": "beta",
     "libsql": "^0.5.22",
+    "lucide-react": "^0.562.0",
     "mastra": "beta",
     "next": "16.1.2",
     "react": "^19.2.1",

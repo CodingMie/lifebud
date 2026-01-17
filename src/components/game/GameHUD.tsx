@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wallet, Activity, Brain, Baby } from 'lucide-react';
+import { Wallet, SmartphoneCharging, Brain, Baby, Heart } from 'lucide-react';
 import { StatusBadge } from './StatusBadge';
 
 interface GameHUDProps {
@@ -9,6 +9,7 @@ interface GameHUDProps {
     health: number;
     mental: number;
     childGrowth: number;
+    marriage: number;
   };
 }
 
@@ -26,8 +27,9 @@ export const GameHUD: React.FC<GameHUDProps> = ({ currentStageTitle, savings, at
      {/* 中间属性栏 */}
      <div className="mt-2 flex gap-2 md:gap-4 justify-center bg-black/20 backdrop-blur-md p-2 px-6 rounded-full border border-white/10 shadow-lg">
         <StatusBadge icon={<Wallet />} value={`¥${(savings/10000).toFixed(1)}w`} color="bg-amber-500" />
-        <StatusBadge icon={<Activity />} value={attributes.health} color="bg-rose-500" />
+        <StatusBadge icon={<SmartphoneCharging />} value={attributes.health} color="bg-emerald-500" />
         <StatusBadge icon={<Brain />} value={attributes.mental} color="bg-indigo-500" />
+        <StatusBadge icon={<Heart />} value={attributes.marriage} color="bg-rose-500" />
         <StatusBadge icon={<Baby />} value={attributes.childGrowth} color="bg-emerald-500" />
      </div>
   </div>

@@ -2,27 +2,47 @@
 export const CHARACTERS = {
   hero: {
     name: "我",
-    avatar: "https://api.dicebear.com/9.x/micah/svg?seed=Zoey&backgroundColor=transparent&baseColor=f9c9b6&mouth=smile&hair=fonze&hairColor=363636&facialHairProbability=0",
-    style: "left-[-5%] bottom-[-5%] z-20" 
+    avatar: "/woman.png",
+    style: "left-[10%] bottom-[-11.5%] z-20" 
+  },
+  hero_1: {
+    name: "我",
+    avatar: "/woman.png",
+    style: "left-[10%] bottom-[-11.5%] z-20 max-w-[280px]" 
+  },
+  hero_2: {
+    name: "我",
+    avatar: "/woman_2.png",
+    style: "left-[15%] bottom-[-11.5%] z-20 max-w-[200px]" 
+  },
+  hero_3: {
+    name: "我",
+    avatar: "/two_people.png",
+    style: "left-[-10%] bottom-[-14.5%] z-20 max-w-[380px] -translate-x-25" 
+  },
+  hero_4: {
+    name: "我",
+    avatar: "/woman_3.png",
+    style: "left-[10%] bottom-[-14%] z-20 max-w-[330px]" 
   },
   husband: {
     name: "丈夫",
-    avatar: "https://api.dicebear.com/9.x/micah/svg?seed=Felix&backgroundColor=transparent&baseColor=f9c9b6&mouth=smirk&hair=doug&hairColor=000000&shirt=collared&shirtColor=F44336",
-    style: "right-[-2%] bottom-[-5%] z-10" 
+    avatar: "/man.png",
+    style: "right-[10%] bottom-[-15%] z-10" 
   },
   doctor: {
     name: "医生",
-    avatar: "https://api.dicebear.com/9.x/micah/svg?seed=Christopher&backgroundColor=transparent&baseColor=f9c9b6&mouth=laughing&hair=mrClean&glasses=round&shirt=collared",
-    style: "right-[0%] bottom-[-5%] z-10" 
+    avatar: "/npc.png",
+    style: "right-[10%] bottom-[-15%] z-10" 
   },
   nurse: {
     name: "护士",
-    avatar: "https://api.dicebear.com/9.x/micah/svg?seed=Amaya&backgroundColor=transparent&baseColor=f9c9b6&mouth=smile&hair=pixie&hairColor=d4a15a",
-    style: "right-[0%] bottom-[-5%] z-10" 
+    avatar: "/npc.png",
+    style: "right-[10%] bottom-[-15%] z-10" 
   },
   guide: {
     name: "贴心姐姐",
-    avatar: "https://api.dicebear.com/9.x/micah/svg?seed=Jeane&backgroundColor=transparent&baseColor=f9c9b6&mouth=smile&hair=full&hairColor=ac66cc&earrings=hoop",
+    avatar: "/tips.png",
     style: "right-[-2%] bottom-[-5%] z-30" 
   }
 };
@@ -45,22 +65,22 @@ export const STAGES = [
   {
     id: 1,
     title: "第一章：备孕",
-    bgImage: "https://images.unsplash.com/photo-1632215354964-1e66c9df3822?auto=format&fit=crop&q=80&w=1920" 
+    bgImage: "/duihuabeijing.png" 
   },
   {
     id: 2,
     title: "第二章：孕期",
-    bgImage: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1920" 
+    bgImage: "/duihuabeijing.png" 
   },
   {
     id: 3,
     title: "第三章：分娩",
-    bgImage: "https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=1920" 
+    bgImage: "/duihuabeijing.png" 
   },
   {
     id: 4,
     title: "第四章：育儿",
-    bgImage: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&q=80&w=1920" 
+    bgImage: "/duihuabeijing.png" 
   }
 ];
 
@@ -71,18 +91,18 @@ export const FALLBACK_DB = {
   1: [ 
     {
       id: 'intro_1',
-      bgImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1920",
+      bgImage: "/intro_1.png",
       dialogue: [
         { speaker: 'narrator', text: '这是一个关于选择的故事。' },
         { speaker: 'narrator', text: '每一个看似微小的决定，都可能改变你和孩子的一生。' },
-        { speaker: 'hero', text: '呼……今天要和老公商量备孕的事情了。', mood: 'nervous' },
+        // { speaker: 'hero', text: '呼……今天要和老公商量备孕的事情了。', mood: 'nervous' },
       ],
       autoNext: true
     },
     {
       id: 'checkup',
       title: '第一次孕前检查',
-      bgImage: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1920", 
+      bgImage: "/duihuabeijing.png", 
       dialogue: [
         { speaker: 'hero', text: '虽然说是“两个人的事”，但总觉得压力都在我这边……' },
         { speaker: 'husband', text: '老婆，别紧张，不管是公立还是私立，我都陪你去。' },
@@ -94,7 +114,7 @@ export const FALLBACK_DB = {
         title: "优生检查科普",
         speaker: "guide",
         text: "别紧张！孕前优生检查包括TORCH五项、生殖系统检查等。这能有效规避流产和胎儿畸形风险，非常重要哦！",
-        bilibiliId: "BV15b411h7R3"
+        bilibiliId: "BV1UB4y137iX"
       },
       options: [
         { 
@@ -116,7 +136,7 @@ export const FALLBACK_DB = {
     {
       id: 'folic',
       title: '医嘱：关于叶酸',
-      bgImage: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=1920",
+      bgImage: "/duihuabeijing.png",
       dialogue: [
         { speaker: 'doctor', text: '这两项指标有点波动，不过问题不大。' },
         { speaker: 'doctor', text: '这盒叶酸拿好。回去记得每天都要吃，一直吃到怀孕后三个月。' },
@@ -129,7 +149,7 @@ export const FALLBACK_DB = {
         title: "叶酸的作用",
         speaker: "guide",
         text: "医生说得对！叶酸（维生素B9）缺乏是造成胎儿神经管畸形的主要原因。不仅你要吃，准爸爸最好也一起补充哦。",
-        videoUrl: "https://media.w3.org/2010/05/sintel/trailer_400p.mp4"
+        bilibiliId: "BV1Zx411G7BT"
       },
       options: [
         { 
@@ -149,9 +169,20 @@ export const FALLBACK_DB = {
   ],
   2: [
     {
+      id: 'intro_2',
+      bgImage: "/intro_2.png",
+      dialogue: [
+        { speaker: 'narrator', text: '恭喜你成功怀孕！' },
+        { speaker: 'narrator', text: '从这一刻起，你的身体与人生都将进入全新的篇章。' },
+        { speaker: 'narrator', text: '激素波动带来的情绪起伏、职场与孕期的冲突、家人的过度关心……' },
+        { speaker: 'narrator', text: '你将在身体变化与外界压力中，学习成为一名母亲。' },
+      ],
+      autoNext: true
+    },
+    {
       id: 'vomit',
       title: '晨吐',
-      bgImage: "https://images.unsplash.com/photo-1584621644694-a7114b087a32?auto=format&fit=crop&q=80&w=1920", 
+      bgImage: "/duihuabeijing.png", 
       dialogue: [
         { speaker: 'hero', text: '呕……咳咳……' },
         { speaker: 'husband', text: '老婆你没事吧？这也吐得太厉害了。' },
@@ -164,7 +195,7 @@ export const FALLBACK_DB = {
         title: "早孕反应",
         speaker: "guide",
         text: "心疼你... 这是HCG激素在作祟，通常8-10周达到高峰。如果吐得太厉害，导致脱水或体重骤降，一定要去医院看医生！",
-        videoUrl: "https://media.w3.org/2010/05/sintel/trailer_400p.mp4"
+        bilibiliId: "BV1pt4y1h7xh"
       },
       options: [
         { 
@@ -185,9 +216,19 @@ export const FALLBACK_DB = {
   ],
   3: [
     {
+      id: 'intro_3',
+      bgImage: "/intro_3.png",
+      dialogue: [
+        { speaker: 'narrator', text: '预产期越来越近，产房的灯光已在眼前。' },
+        { speaker: 'narrator', text: '这是一场与时间赛跑的考验，你将直面疼痛、风险与未知。' },
+        { speaker: 'narrator', text: '选择生产方式、应对突发状况，每一次呼吸都关乎你与宝宝的安危。' },
+      ],
+      autoNext: true
+    },
+    {
       id: 'delivery',
       title: '临产',
-      bgImage: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1920",
+      bgImage: "/duihuabeijing.png",
       dialogue: [
         { speaker: 'nurse', text: '宫口开了三指了，家属在外面等着。' },
         { speaker: 'nurse', text: '你现在情况有点特殊，顺产可能要遭罪，剖腹产恢复慢，你们商量下怎么选？' },
@@ -199,7 +240,7 @@ export const FALLBACK_DB = {
         title: "分娩方式",
         speaker: "guide",
         text: "这是个艰难的决定。顺产对宝宝肺部好，产后恢复快；剖腹产虽然避免了产痛，但毕竟是个大手术。听从医生建议最重要。",
-        videoUrl: "https://media.w3.org/2010/05/sintel/trailer_400p.mp4"
+        bilibiliId: "BV1tp4y1u7tS"
       },
       options: [
         { 
@@ -221,9 +262,20 @@ export const FALLBACK_DB = {
   ],
   4: [
     {
+      id: 'intro_4',
+      bgImage: "/intro_4.png",
+      dialogue: [
+        { speaker: 'narrator', text: '宝宝终于来到了你的身边！' },
+        { speaker: 'narrator', text: '从第一次喂奶到第一声啼哭' },
+        { speaker: 'narrator', text: '从产假结束的复工抉择到育儿理念的冲突' },
+        { speaker: 'narrator', text: '你将在无数个琐碎又温暖的瞬间里，体会为人父母的酸甜苦辣。' },
+      ],
+      autoNext: true
+    },
+    {
       id: 'backtowork',
       title: '返岗',
-      bgImage: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1920", 
+      bgImage: "/duihuabeijing.png", 
       dialogue: [
         { speaker: 'hero', text: '（看着桌上的产假结束通知单，又看了看摇篮里的宝宝）' },
         { speaker: 'hero', text: '该回去上班了吗？可是宝宝还这么小……' },
@@ -235,7 +287,7 @@ export const FALLBACK_DB = {
         title: "背奶妈妈",
         speaker: "guide",
         text: "我见过太多'背奶妈妈'了，她们躲在杂物间挤奶，背着冰包挤地铁。职场不相信眼泪，但母亲的爱是滚烫的。",
-        bilibiliId: "BV1MW411q7yQ"
+        bilibiliId: "BV1dx4y1X7WV"
       },
       options: [
         { 

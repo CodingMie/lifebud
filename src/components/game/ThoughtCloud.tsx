@@ -18,7 +18,7 @@ export const ThoughtCloud: React.FC<ThoughtCloudProps> = ({ text, cost = 0, time
     `}
     style={{ animationDelay: `${delayIndex * 150}ms` }}
   >
-    <div className="relative bg-white/90 backdrop-blur border-2 border-slate-200 rounded-[2rem] p-4 px-6 shadow-lg hover:shadow-xl hover:border-rose-300 z-10 max-w-[200px] text-center">
+    <div className="relative bg-white/80 backdrop-blur border-2 border-slate-200 rounded-[2rem] p-4 px-6 shadow-lg hover:shadow-xl hover:border-rose-300 z-10 max-w-[200px] text-center">
        <div className="font-bold text-sm text-slate-900 group-hover:text-rose-600 transition-colors mb-1">
           {text}
        </div>

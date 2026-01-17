@@ -74,11 +74,11 @@ export const useGameLogic = () => {
 
   // 稳定显示人物
   const activeNPC = useMemo(() => {
-    if (activeSpeaker && activeSpeaker !== 'hero' && activeSpeaker !== 'narrator' && CHARACTERS[activeSpeaker as keyof typeof CHARACTERS]) {
+    if (activeSpeaker && !activeSpeaker.startsWith('hero') && activeSpeaker !== 'narrator' && CHARACTERS[activeSpeaker as keyof typeof CHARACTERS]) {
         return activeSpeaker;
     }
     if (currentEvent?.dialogue) {
-        const firstNpc = currentEvent.dialogue.find(line => line.speaker !== 'hero' && line.speaker !== 'narrator' && CHARACTERS[line.speaker as keyof typeof CHARACTERS]);
+        const firstNpc = currentEvent.dialogue.find(line => !line.speaker.startsWith('hero') && line.speaker !== 'narrator' && CHARACTERS[line.speaker as keyof typeof CHARACTERS]);
         return firstNpc ? firstNpc.speaker : null;
     }
     return null;
