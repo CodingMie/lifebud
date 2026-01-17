@@ -432,41 +432,9 @@ export const FALLBACK_DB = {
           "outcome": "你不想花大钱，试图靠身体硬扛。恢复期极其漫长痛苦，并发症让你甚至无法抱起孩子，全家笼罩在阴霾中。"
         }
       ]
-    },
-    {
-      "id": "nicu_alert",
-      "title": "玻璃房里的守望",
-      "bgImage": "/duihuabeijing.png",
-      "dialogue": [
-        { "speaker": "nurse", "text": "宝宝情况不太稳定，肺部发育还不成熟，必须马上转入新生儿重症监护室（NICU）。" },
-        { "speaker": "hero", "text": "我还没来得及看清他的样子……医生，要住多久？" },
-        { "speaker": "nurse", "text": "这个看恢复情况。费用每天都不低，家属要去交一下预付款。" }
-      ],
-      "type": "fixed",
-      "knowledge": {
-        "id": "k_nicu",
-        "title": "早产儿护理",
-        "speaker": "guide",
-        "text": "NICU（新生儿重症监护室）能提供恒温恒湿环境和呼吸支持。虽然费用高昂且母婴分离痛苦，但对早产儿生存至关重要。",
-        "bilibiliId": "BV1w5BqYCEP8"
-      },
-      "options": [
-        {
-          "text": "积极配合治疗",
-          "cost": 15000,
-          "changes": { "mental": -10, "babyGrowth": 12 },
-          "months": 1,
-          "outcome": "每周高昂的账单像流水一样，但透过玻璃窗看到宝宝身上的管子一根根撤掉，体重一点点增加，一切等待都值得。"
-        },
-        {
-          "text": "质疑医院要求出院",
-          "cost": 0,
-          "changes": { "babyGrowth": -15, "health": -8, "marriage": -12 },
-          "months": 0,
-          "outcome": "你不顾医生劝阻强行把孩子抱回了家。孩子夜里反复发烧呛奶，全家乱成一锅粥，丈夫对你的决定充满了埋怨。"
-        }
-      ]
-    },
+    }
+  ],
+  4: [
     {
       "id": "ppd_shadow",
       "title": "情绪的黑狗",
@@ -530,6 +498,17 @@ export const FALLBACK_DB = {
       ]
     },
     {
+      id: 'intro_4',
+      bgImage: "/intro_4.png",
+      dialogue: [
+        { speaker: 'narrator', text: '宝宝终于来到了你的身边！' },
+        { speaker: 'narrator', text: '从第一次喂奶到第一声啼哭' },
+        { speaker: 'narrator', text: '从产假结束的复工抉择到育儿理念的冲突' },
+        { speaker: 'narrator', text: '你将在无数个琐碎又温暖的瞬间里，体会为人父母的酸甜苦辣。' },
+      ],
+      autoNext: true
+    },
+    {
       "id": "feeding_struggle",
       "title": "喂养的难题",
       "bgImage": "/duihuabeijing.png",
@@ -561,19 +540,6 @@ export const FALLBACK_DB = {
           "outcome": "你顶住压力断了奶。虽然偶尔会有愧疚感，但终于能睡个整觉了，身体恢复得很快，带娃也有精力了。"
         }
       ]
-    }
-  ],
-  4: [
-    {
-      id: 'intro_4',
-      bgImage: "/intro_4.png",
-      dialogue: [
-        { speaker: 'narrator', text: '宝宝终于来到了你的身边！' },
-        { speaker: 'narrator', text: '从第一次喂奶到第一声啼哭' },
-        { speaker: 'narrator', text: '从产假结束的复工抉择到育儿理念的冲突' },
-        { speaker: 'narrator', text: '你将在无数个琐碎又温暖的瞬间里，体会为人父母的酸甜苦辣。' },
-      ],
-      autoNext: true
     },
     {
       id: 'backtowork',
