@@ -24,12 +24,10 @@ interface KnowledgeButtonProps {
 // };
 
 
-import React from 'react';
-
 // 假设的 Props 定义，如果你已有则忽略
 interface KnowledgeButtonProps {
   visible: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 export const KnowledgeButton: React.FC<KnowledgeButtonProps> = ({ visible, onClick }) => {

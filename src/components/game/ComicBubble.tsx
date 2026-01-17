@@ -29,7 +29,7 @@ export const ComicBubble: React.FC<ComicBubbleProps> = ({ speaker, text, onCompl
 
   const isHero = speaker.startsWith('hero');
   const isNarrator = speaker === 'narrator';
-  const charInfo = CHARACTERS[speaker] || { name: '旁白' };
+  const charInfo = (CHARACTERS as any)[speaker] || { name: '旁白' };
 
   if (isNarrator) {
      return (
