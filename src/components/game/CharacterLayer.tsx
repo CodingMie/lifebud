@@ -21,7 +21,7 @@ export const CharacterLayer: React.FC<CharacterLayerProps> = ({ activeSpeaker, a
           w-[70vw] h-[60vh] md:w-[40vw] md:h-[80vh] lg:w-[35vw] lg:h-[85vh]
           
           
-          ${activeSpeaker.startsWith('hero') || activeNPC !== null && activeNPC.startsWith('hero') ? 'opacity-100 scale-100 brightness-110' : activeSpeaker === 'narrator' ? 'opacity-100 scale-0 brightness-110' : 'opacity-80 scale-100 brightness-90'}
+          ${activeSpeaker !== null && activeSpeaker.startsWith('hero') || activeNPC !== null && activeNPC.startsWith('hero') ? 'opacity-100 scale-100 brightness-110' : activeSpeaker === 'narrator' ? 'opacity-100 scale-0 brightness-110' : 'opacity-80 scale-100 brightness-90'}
        `}>
         
         {currentStage === 1 ? <img src={CHARACTERS['hero_1'].avatar} alt="Hero" className="w-full h-full object-contain drop-shadow-2xl" /> :
