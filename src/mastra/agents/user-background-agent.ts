@@ -5,7 +5,7 @@ import { Memory } from "@mastra/memory";
 export const userBackgroundAgent = new Agent({
   id: "user-background-agent",
   name: "User Background Agent",
-  model: 'iflowcn/glm-4.6',
+  model: 'modelscope/Qwen/Qwen3-30B-A3B-Instruct-2507',
   instructions: `
   你是一个负责生成用户初始背景属性的 Agent。
   根据用户提供的输入参数（年龄、城市、工作强度、伴侣状态），生成用户的初始核心属性值。
