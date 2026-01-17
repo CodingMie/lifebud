@@ -11,7 +11,7 @@ export const StoryAgentState = z.object({
 export const storyAgent = new Agent({
   id: "story-agent",
   name: "Story Agent",
-  model: 'iflowcn/glm-4.6',
+  model: 'modelscope/Qwen/Qwen3-Coder-30B-A3B-Instruct',
   instructions: `
   你是一个现实约束型剧情生成 Agent，负责在一款关于生育与养育真相的文字冒险游戏中生成剧情事件。
   **核心职责**：
@@ -59,7 +59,7 @@ export const storyAgent = new Agent({
   ]
 }
 `,
-    memory: new Memory({
+  memory: new Memory({
     storage: new LibSQLStore({
       id: "story-agent-memory",
       url: "file::memory:",

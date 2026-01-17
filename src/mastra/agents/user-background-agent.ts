@@ -1,11 +1,9 @@
 import { Agent } from "@mastra/core/agent";
-import { LibSQLStore } from "@mastra/libsql";
-import { Memory } from "@mastra/memory";
 
 export const userBackgroundAgent = new Agent({
   id: "user-background-agent",
   name: "User Background Agent",
-  model: 'modelscope/Qwen/Qwen3-30B-A3B-Instruct-2507',
+  model: 'modelscope/Qwen/Qwen3-Coder-30B-A3B-Instruct',
   instructions: `
   你是一个负责生成用户初始背景属性的 Agent。
   根据用户提供的输入参数（年龄、城市、工作强度、伴侣状态），生成用户的初始核心属性值。

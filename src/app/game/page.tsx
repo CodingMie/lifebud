@@ -61,23 +61,23 @@ export default function ParentingSimulator() {
 
   if (gameState === 'setup') {
     return (
-      <SetupWizard 
-        background={background} 
-        setBackground={setBackground} 
-        onComplete={startGame} 
+      <SetupWizard
+        background={background}
+        setBackground={setBackground}
+        onComplete={startGame}
       />
     );
   }
 
   if (gameState === 'end' && endGameReport) {
     return (
-      <EndGameScreen 
-        report={endGameReport} 
-        age={currentAgeYear} 
+      <EndGameScreen
+        report={endGameReport}
+        age={currentAgeYear}
         score={attributes.childGrowth}
         attributes={attributes}
         savings={savings}
-        onRestart={() => setGameState('start')} 
+        onRestart={() => setGameState('start')}
       />
     );
   }
@@ -89,7 +89,7 @@ export default function ParentingSimulator() {
       <GameBackground image={currentEvent?.bgImage || currentStage?.bgImage} />
 
       {/* 2. 顶部状态栏 (HUD) */}
-      <GameHUD 
+      <GameHUD
         currentStageTitle={currentStage.title}
         savings={savings}
         attributes={attributes}
@@ -97,51 +97,51 @@ export default function ParentingSimulator() {
 
       {/* 3. 角色立绘层 */}
       <CharacterLayer activeSpeaker={activeSpeaker} activeNPC={activeNPC} />
-      
+
       {/* 4. 知识点悬挂入口 */}
-      <KnowledgeButton 
+      <KnowledgeButton
         visible={knowledgeVisible}
         onClick={(e) => { e.stopPropagation(); setMediaData(currentEvent.knowledge || currentEvent.story); }}
       />
 
       {/* 5. 交互与对话层 */}
       <div className="absolute inset-0 z-40 flex flex-col justify-end pb-8 md:pb-12 pointer-events-none">
-         {/* 选项云朵 */}
-         <div className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto px-4 relative pointer-events-auto">
-             {showOptions && currentEvent?.options && (
-                <div className="flex flex-col gap-3 md:flex-row md:gap-12 items-center justify-center mb-32 md:mb-16 w-full">
-                   {currentEvent.options.map((opt, idx) => (
-                      <ThoughtCloud 
-                        key={idx}
-                        text={opt.text}
-                        cost={opt.cost}
-                        time={opt.months}
-                        onClick={() => handleOption(opt)}
-                        delayIndex={idx}
-                      />
-                   ))}
-                </div>
-             )}
-         </div>
+        {/* 选项云朵 */}
+        <div className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto px-4 relative pointer-events-auto">
+          {showOptions && currentEvent?.options && (
+            <div className="flex flex-col gap-3 md:flex-row md:gap-12 items-center justify-center mb-32 md:mb-16 w-full">
+              {currentEvent.options.map((opt, idx) => (
+                <ThoughtCloud
+                  key={idx}
+                  text={opt.text}
+                  cost={opt.cost}
+                  time={opt.months}
+                  onClick={() => handleOption(opt)}
+                  delayIndex={idx}
+                />
+              ))}
+            </div>
+          )}
+        </div>
 
-         {/* 底部对话框 */}
-         <div className="pointer-events-auto px-4">
-            {currentDialogueLine && !feedback && (
-               <ComicBubble 
-                  key={`${currentEventIndex}-${dialogueIndex}`} 
-                  speaker={currentDialogueLine.speaker} 
-                  text={currentDialogueLine.text}
-                  onComplete={() => setTextCompleted(true)}
-               />
-            )}
-
-            {/* 反馈信息显示 */}
-            <FeedbackModal 
-              feedback={feedback}
-              feedbackChanges={feedbackChanges}
-              onNext={nextEvent}
+        {/* 底部对话框 */}
+        <div className="pointer-events-auto px-4">
+          {currentDialogueLine && !feedback && (
+            <ComicBubble
+              key={`${currentEventIndex}-${dialogueIndex}`}
+              speaker={currentDialogueLine.speaker}
+              text={currentDialogueLine.text}
+              onComplete={() => setTextCompleted(true)}
             />
-         </div>
+          )}
+
+          {/* 反馈信息显示 */}
+          <FeedbackModal
+            feedback={feedback}
+            feedbackChanges={feedbackChanges}
+            onNext={nextEvent}
+          />
+        </div>
       </div>
 
       {/* 6. 模态层 */}
