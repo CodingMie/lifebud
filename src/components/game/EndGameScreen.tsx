@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RotateCcw, Coins, Heart, Brain, Activity, ArrowRight } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, PolarRadiusAxis } from 'recharts';
 
@@ -42,6 +42,17 @@ const StatCard = ({ icon: Icon, value, label, color, barColor }: { icon: any, va
 );
 
 export const EndGameScreen: React.FC<EndGameScreenProps> = ({ report, age, score, attributes, savings, onRestart }) => {
+  const [showEnding, setShowEnding] = useState(false);
+
+  if (showEnding) {
+    return (
+      <div 
+        className="fixed inset-0 w-full h-full bg-[url('/ending.png')] bg-cover bg-center z-50"
+        onClick={onRestart}
+      />
+    );
+  }
+
   // Calculate wealth score (0-100) for radar chart. Assuming 100w is 100 points for visualization
   const wealthScore = Math.min(Math.max(Math.floor(savings / 10000), 0), 100);
   
@@ -172,7 +183,7 @@ export const EndGameScreen: React.FC<EndGameScreenProps> = ({ report, age, score
 
         {/* Floating Restart Button */}
         <button 
-            onClick={onRestart}
+            onClick={() => setShowEnding(true)}
             className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-2xl flex items-center justify-center text-orange-500 hover:scale-110 hover:bg-orange-500 hover:text-white transition-all duration-300 group z-50 border-4 border-orange-100"
         >
             <ArrowRight size={32} className="group-hover:translate-x-1 transition-transform" />
