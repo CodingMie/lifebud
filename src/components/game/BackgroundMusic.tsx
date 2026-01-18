@@ -39,6 +39,43 @@ export default function BackgroundMusic() {
     setIsPlaying(!isPlaying);
   };
 
+  // ... 前面的 import 和变量定义 ...
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    // 1. 设置默认音量 (0.4 比较合适，太大声会吓到人)
+    audio.volume = 0.4;
+
+    // 2. 定义一个播放函数
+    const attemptPlay = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+        // 如果播放成功，移除全局点击监听（不需要了）
+        document.removeEventListener("click", attemptPlay);
+      } catch (error) {
+        console.log("自动播放被拦截，等待用户点击...");
+        setIsPlaying(false);
+      }
+    };
+
+    // 3. 尝试立即播放 (部分浏览器允许，或用户之前交互过)
+    attemptPlay();
+
+    // 4. 关键策略：如果自动播放失败，则监听整个网页的“点击”事件
+    // 用户只要点页面的任何地方（不仅仅是按钮），音乐就会立马开始
+    document.addEventListener("click", attemptPlay);
+
+    // 组件卸载时清理监听
+    return () => {
+      document.removeEventListener("click", attemptPlay);
+    };
+  }, []);
+
+  // ... 后面的 return 代码 ...
+
   return (
     <div className="fixed bottom-5 right-5 z-50">
       {/* 隐藏的 audio 标签 */}
