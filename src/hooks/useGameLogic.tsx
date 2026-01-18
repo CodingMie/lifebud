@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Star, Shield, Smile } from 'lucide-react';
+import { Star, Shield, Smile, DollarSign, Heart, Briefcase, Activity, Frown, Sun } from 'lucide-react';
 import { CHARACTERS, FALLBACK_DB, INITIAL_ATTRIBUTES, STAGES } from '@/lib/resource';
 
 import { useAgent } from "@copilotkit/react-core/v2";
@@ -211,15 +211,81 @@ export const useGameLogic = () => {
 
   const endGameReport = useMemo(() => {
     if (gameState !== 'end') return null;
-    const { health, mental, childGrowth } = attributes;
-    if (health >= 70 && mental >= 70 && childGrowth >= 80) {
-      return { title: "完美人生", icon: <Star size={40} />, comment: "你用智慧与爱，平衡了自我与家庭，活出了令人羡慕的模样。", suggestion: "请继续保持这份从容，将幸福传递给更多人。" };
-    } else if (childGrowth >= 80) {
-      return { title: "奉献的母亲", icon: <Shield size={40} />, comment: "你将最好的一切都给了孩子，孩子茁壮成长，但你也为此付出了巨大的代价。", suggestion: "记得多爱自己一点，你首先是你自己，然后才是母亲。" };
-    } else {
-      return { title: "平凡之路", icon: <Smile size={40} />, comment: "生活没有十全十美，虽然有遗憾，但这就是真实的人生。", suggestion: "接纳不完美，生活依然充满阳光。" };
+    const { health, mental, childGrowth, marriage } = attributes;
+    
+    // 1. 完美人生：各项指标都很高
+    if (health >= 80 && mental >= 80 && marriage >= 80 && childGrowth >= 80 && savings >= 500000) {
+      return { 
+        title: "完美人生", 
+        icon: <Star size={40} className="text-yellow-500" />, 
+        comment: "你不仅拥有令人羡慕的财富，更拥有健康的体魄、美满的婚姻和优秀的孩子。你是人生的赢家！", 
+        suggestion: "你的故事将激励无数人，请继续享受这精彩绝伦的人生。" 
+      };
+    } 
+    // 2. 富甲一方：很有钱但家庭或孩子一般
+    else if (savings >= 1000000 && (marriage < 50 || childGrowth < 50)) {
+      return { 
+        title: "富甲一方", 
+        icon: <DollarSign size={40} className="text-yellow-600" />, 
+        comment: "你在事业上取得了巨大的成功，积累了丰厚的财富，但回首望去，身边的人似乎渐行渐远。", 
+        suggestion: "金钱可以买到很多东西，但买不到真心的陪伴。试着停下脚步，去修补那些珍贵的关系吧。" 
+      };
     }
-  }, [gameState, attributes]);
+    // 3. 职场精英：有钱且精神状态不错
+    else if (savings >= 500000 && mental >= 70) {
+      return { 
+        title: "职场精英", 
+        icon: <Briefcase size={40} className="text-blue-600" />, 
+        comment: "你在职场上叱咤风云，用实力证明了自己的价值。经济独立是你最大的底气。", 
+        suggestion: "职场的成功固然重要，但也要注意劳逸结合，身体才是革命的本钱。" 
+      };
+    }
+    // 4. 奉献的母亲：孩子成长很高
+    else if (childGrowth >= 85) {
+      return { 
+        title: "奉献的母亲", 
+        icon: <Shield size={40} className="text-green-600" />, 
+        comment: "你将最好的一切都给了孩子，孩子茁壮成长，是你最大的骄傲。但这背后是你默默的付出。", 
+        suggestion: "记得多爱自己一点，你首先是你自己，然后才是母亲。" 
+      };
+    }
+    // 5. 幸福港湾：婚姻和孩子都不错
+    else if (marriage >= 80 && childGrowth >= 70) {
+       return { 
+        title: "幸福港湾", 
+        icon: <Heart size={40} className="text-pink-500" />, 
+        comment: "你用心经营着家庭，虽然没有大富大贵，但温馨的家庭是你最坚实的后盾。", 
+        suggestion: "平平淡淡才是真，继续保持这份对家庭的热爱吧。" 
+      };
+    }
+    // 6. 身心俱疲：健康或精神很差
+    else if (health < 40 || mental < 40) {
+      return { 
+        title: "身心俱疲", 
+        icon: <Activity size={40} className="text-red-500" />, 
+        comment: "生活的重担压得你喘不过气，身体和精神都发出了红灯警报。", 
+        suggestion: "请立刻停下来休息！没有什么比你的健康更重要。寻求帮助并不是软弱的表现。" 
+      };
+    }
+    // 7. 平凡之路：普通结局
+    else if (health >= 50 && mental >= 50) {
+      return { 
+        title: "平凡之路", 
+        icon: <Sun size={40} className="text-orange-500" />, 
+        comment: "生活没有十全十美，虽然有遗憾，但这就是真实的人生。你在柴米油盐中找到了属于自己的节奏。", 
+        suggestion: "接纳不完美，生活依然充满阳光。" 
+      };
+    }
+    // 8. 充满遗憾：Bad End
+    else {
+      return { 
+        title: "充满遗憾", 
+        icon: <Frown size={40} className="text-gray-500" />, 
+        comment: "回首往事，或许有太多的'如果'和'早知道'。生活留下了不少遗憾。", 
+        suggestion: "人生没有彩排，但每一天都是新的开始。从现在起，善待自己，拥抱生活。" 
+      };
+    }
+  }, [gameState, attributes, savings]);
 
   return {
       gameState,

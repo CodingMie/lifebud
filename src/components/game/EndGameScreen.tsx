@@ -66,11 +66,11 @@ export const EndGameScreen: React.FC<EndGameScreenProps> = ({ report, age, score
   const childGrowth = attributes.childGrowth || 0;
 
   return (
-    <div className="h-screen w-full bg-[url('/end.png')] bg-cover bg-center flex items-center justify-center p-4 md:p-8 font-sans overflow-hidden">
-      <div className="w-full max-w-6xl h-[90vh] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 relative">
+    <div className="min-h-screen w-full bg-[url('/end.png')] bg-cover bg-center flex items-center justify-center p-4 md:p-8 font-sans overflow-y-auto md:overflow-hidden">
+      <div className="w-full max-w-6xl h-auto md:h-[90vh] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 relative pb-24 md:pb-0">
         
         {/* Top Left: Summary Card */}
-        <div className="md:col-span-8 bg-white rounded-[2.5rem] p-8 shadow-xl flex flex-col justify-center relative overflow-hidden">
+        <div className="md:col-span-8 bg-white rounded-[2.5rem] p-6 md:p-8 shadow-xl flex flex-col justify-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-400 to-orange-400"></div>
             <div className="flex items-center gap-4 mb-4">
                 <span className="bg-rose-500 text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase shadow-md shadow-rose-200">
@@ -164,7 +164,7 @@ export const EndGameScreen: React.FC<EndGameScreenProps> = ({ report, age, score
             </div>
 
             {/* Expert Suggestion */}
-            <div className="flex-1 bg-white rounded-[2.5rem] p-8 shadow-xl relative overflow-hidden flex flex-row items-start gap-6">
+            <div className="flex-1 bg-white rounded-[2.5rem] p-6 md:p-8 shadow-xl relative overflow-hidden flex flex-row items-start gap-4 md:gap-6">
                  {/* Decorative Line */}
                  <div className="w-1.5 self-stretch bg-blue-500 rounded-full shrink-0 opacity-80"></div>
                  
@@ -184,9 +184,9 @@ export const EndGameScreen: React.FC<EndGameScreenProps> = ({ report, age, score
         {/* Floating Restart Button */}
         <button 
             onClick={() => setShowEnding(true)}
-            className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-2xl flex items-center justify-center text-orange-500 hover:scale-110 hover:bg-orange-500 hover:text-white transition-all duration-300 group z-50 border-4 border-orange-100"
+            className="fixed bottom-6 right-6 md:absolute md:-right-16 md:top-1/2 md:bottom-auto md:-translate-y-1/2 w-14 h-14 md:w-16 md:h-16 bg-white rounded-full shadow-2xl flex items-center justify-center text-orange-500 hover:scale-110 hover:bg-orange-500 hover:text-white transition-all duration-300 group z-50 border-4 border-orange-100"
         >
-            <ArrowRight size={32} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-7 h-7 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" />
         </button>
 
       </div>

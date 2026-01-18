@@ -277,7 +277,7 @@ export const FALLBACK_DB = {
         {
           "text": "向上司提出抗议",
           "cost": 0,
-          "changes": { "workLoad": -5, "mental": 6, "wealth": -500 },
+          "changes": { "workLoad": -5, "mental": 6},
           "months": 0,
           "outcome": "虽然奖金受了点影响，但明确了底线后，那些推诿的工作终于不再找上门了，心情舒畅。"
         },
@@ -318,7 +318,7 @@ export const FALLBACK_DB = {
         {
           "text": "依赖药物缓解",
           "cost": 600,
-          "changes": { "health": 3, "mental": -2, "wealth": -600 },
+          "changes": { "health": 3, "mental": -2,},
           "months": 0,
           "outcome": "买来了昂贵的消肿产品，效果虽然快，但看着账单，你又开始焦虑孩子的奶粉钱了。"
         }
@@ -436,6 +436,17 @@ export const FALLBACK_DB = {
   ],
   4: [
     {
+      id: 'intro_4',
+      bgImage: "/intro_4.png",
+      dialogue: [
+        { speaker: 'narrator', text: '宝宝终于来到了你的身边！' },
+        { speaker: 'narrator', text: '从第一次喂奶到第一声啼哭' },
+        { speaker: 'narrator', text: '从产假结束的复工抉择到育儿理念的冲突' },
+        { speaker: 'narrator', text: '你将在无数个琐碎又温暖的瞬间里，体会为人父母的酸甜苦辣。' },
+      ],
+      autoNext: true
+    },
+    {
       "id": "ppd_shadow",
       "title": "情绪的黑狗",
       "bgImage": "/duihuabeijing.png",
@@ -497,17 +508,7 @@ export const FALLBACK_DB = {
         }
       ]
     },
-    {
-      id: 'intro_4',
-      bgImage: "/intro_4.png",
-      dialogue: [
-        { speaker: 'narrator', text: '宝宝终于来到了你的身边！' },
-        { speaker: 'narrator', text: '从第一次喂奶到第一声啼哭' },
-        { speaker: 'narrator', text: '从产假结束的复工抉择到育儿理念的冲突' },
-        { speaker: 'narrator', text: '你将在无数个琐碎又温暖的瞬间里，体会为人父母的酸甜苦辣。' },
-      ],
-      autoNext: true
-    },
+
     {
       "id": "feeding_struggle",
       "title": "喂养的难题",
@@ -596,14 +597,14 @@ export const FALLBACK_DB = {
         {
           "text": "全部免费一类疫苗",
           "cost": 500,
-          "changes": { "wealth": -500, "babyGrowth": 6 },
+          "changes": { "babyGrowth": 6 },
           "months": 0,
           "outcome": "选择了国家兜底的基础方案。虽然心里稍微有点对不起宝宝，但省下的钱确实解了燃眉之急。宝宝也顺利度过了观察期。"
         },
         {
           "text": "部分自费二类疫苗",
           "cost": 3000,
-          "changes": { "wealth": -3000, "babyGrowth": 10 },
+          "changes": { "babyGrowth": 10 },
           "months": 0,
           "outcome": "咬咬牙刷了卡。看着宝宝少挨了四针，不仅减少了去医院交叉感染的风险，你心里也觉得这钱花得值，这就是“花钱买安稳”。"
         }
@@ -630,14 +631,14 @@ export const FALLBACK_DB = {
         {
           "text": "立即就医遵医嘱",
           "cost": 1200,
-          "changes": { "wealth": -1200, "mental": -5, "babyGrowth": 8 },
+          "changes": {  "mental": -5, "babyGrowth": 8 },
           "months": 0,
           "outcome": "在急诊室折腾了一夜，抽血化验确诊是病毒性感染。虽然大人累得虚脱，但看着宝宝退烧安稳睡去，悬着的心终于放下了。"
         },
         {
           "text": "自行用药观察",
           "cost": 300,
-          "changes": { "wealth": -300, "mental": -10, "babyGrowth": -2 },
+          "changes": {"mental": -10, "babyGrowth": -2 },
           "months": 0,
           "outcome": "你给宝宝喂了退烧药。这一夜你几乎每隔十分钟就量一次体温，焦虑得想撞墙，好在天亮时烧终于退了，但你发誓下次一定去医院。"
         }
@@ -657,7 +658,7 @@ export const FALLBACK_DB = {
         {
           "text": "参加夫妻沟通课程",
           "cost": 1800,
-          "changes": { "wealth": -1800, "marriage": 12, "mental": 7 },
+          "changes": {  "marriage": 12, "mental": 7 },
           "months": 1,
           "outcome": "在咨询师的引导下，你们学会了“非暴力沟通”。丈夫开始理解你的良苦用心，你们约定了统一的育儿红线。"
         },
