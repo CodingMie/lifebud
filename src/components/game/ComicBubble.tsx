@@ -135,8 +135,8 @@ export const ComicBubble: React.FC<ComicBubbleProps> = ({ speaker, text, onCompl
   }
 
   const alignmentClass = disableAutoPosition 
-      ? (isHero ? 'items-start' : 'items-end')
-      : (isHero ? 'items-start ml-4 md:ml-[25%] -translate-y-50' : 'items-end mr-8 md:mr-[50%] -translate-y-20');
+      ? (isHero ? 'items-start ml-16 md:ml-[35%]' : 'items-end mr-16 md:mr-[35%]')
+      : (isHero ? 'items-start ml-16 md:ml-[45%] -translate-y-24' : 'items-end mr-16 md:mr-[70%] -translate-y-4');
   
   const bubbleRoundedClass = isHero ? 'rounded-2xl rounded-tl-none' : 'rounded-2xl rounded-tr-none';
   const triangleClass = isHero ? '-left-[8px] top-[15px] border-r-white/70' : '-right-[8px] top-[15px] border-l-white/70';
